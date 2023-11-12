@@ -29,10 +29,6 @@ print(myList)
 
 print(["foo", "bar"].values());
 
-myList = ["foo", "bar", "xxx"]
-myList.reverse()
-print(myList)
-
 print(["foo", "bar", "xxx"].join(";"))
 
 print(params.len)
