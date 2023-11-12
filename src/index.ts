@@ -25,6 +25,7 @@ export function getAPI(): ObjectValue {
   apiInterface.set(s('hash'), generics.hash);
   apiInterface.set(s('range'), generics.range);
   apiInterface.set(s('yield'), generics.customYield);
+  apiInterface.set(s('refEquals'), generics.refEquals);
 
   apiInterface.set(s('abs'), math.abs);
   apiInterface.set(s('acos'), math.acos);

@@ -248,3 +248,43 @@ export const customYield = CustomFunction.createExternal(
     });
   }
 );
+
+export const refEquals = CustomFunction.createExternal(
+  'refEquals',
+  (
+    _ctx: OperationContext,
+    _self: CustomValue,
+    args: Map<string, CustomValue>
+  ): Promise<CustomValue> => {
+    const a = args.get('a');
+    const b = args.get('b');
+
+    if (a instanceof CustomNil) {
+      return Promise.resolve(new CustomBoolean(b instanceof CustomNil));
+    } else if (a instanceof CustomNumber) {
+      return Promise.resolve(
+        new CustomBoolean(b instanceof CustomNumber && a.value === b.value)
+      );
+    } else if (a instanceof CustomString) {
+      return Promise.resolve(
+        new CustomBoolean(b instanceof CustomString && a.value === b.value)
+      );
+    } else if (a instanceof CustomList) {
+      return Promise.resolve(
+        new CustomBoolean(b instanceof CustomList && a.value === b.value)
+      );
+    } else if (a instanceof CustomMap) {
+      return Promise.resolve(
+        new CustomBoolean(b instanceof CustomMap && a.value === b.value)
+      );
+    } else if (a instanceof CustomFunction) {
+      return Promise.resolve(
+        new CustomBoolean(b instanceof CustomFunction && a.value === b.value)
+      );
+    }
+
+    return Promise.resolve(new CustomBoolean(false));
+  }
+)
+  .addArgument('a')
+  .addArgument('b');
