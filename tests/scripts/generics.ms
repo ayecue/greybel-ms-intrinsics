@@ -29,7 +29,7 @@ print(bitOr(1, 1))
 
 print(yield)
 
-print(stackTrace)
+print(stackTrace.len == 1)
 print(version)
 
 print(refEquals({}, {}))

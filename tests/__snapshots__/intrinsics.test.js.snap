@@ -40,7 +40,7 @@ exports[`interpreter default scripts generics.ms 19`] = `"1"`;
 
 exports[`interpreter default scripts generics.ms 20`] = `"null"`;
 
-exports[`interpreter default scripts generics.ms 21`] = `"[\\"at /Users/_ac/workspace/greybel-ms-intrinsics/tests/scripts/generics.ms:32:1\\"]"`;
+exports[`interpreter default scripts generics.ms 21`] = `"1"`;
 
 exports[`interpreter default scripts generics.ms 22`] = `"{\\"miniscript\\":\\"1.5.9\\",\\"buildDate\\":\\"2000.01.01\\",\\"host\\":\\"3.3.0\\",\\"hostName\\":\\"Greybel\\",\\"hostInfo\\":\\"https://github.com/ayecue/greybel-interpreter\\"}"`;
 
