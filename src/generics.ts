@@ -8,6 +8,7 @@ import {
   CustomString,
   CustomValue,
   DefaultType,
+  ObjectValue,
   OperationContext
 } from 'greybel-interpreter';
 
@@ -288,3 +289,26 @@ export const refEquals = CustomFunction.createExternal(
 )
   .addArgument('a')
   .addArgument('b');
+
+export const version = CustomFunction.createExternal(
+  'version',
+  (
+    _ctx: OperationContext,
+    _self: CustomValue,
+    _args: Map<string, CustomValue>
+  ): Promise<CustomValue> => {
+    const d = new ObjectValue();
+
+    d.set(new CustomString('miniscript'), new CustomString('1.5.9'));
+    d.set(new CustomString('buildDate'), new CustomString('2000.01.01'));
+
+    d.set(new CustomString('host'), new CustomString('3.3.0'));
+    d.set(new CustomString('hostName'), new CustomString('Greybel'));
+    d.set(
+      new CustomString('hostInfo'),
+      new CustomString('https://github.com/ayecue/greybel-interpreter')
+    );
+
+    return Promise.resolve(new CustomMap(d));
+  }
+);
