@@ -44,6 +44,10 @@ exports[`interpreter default scripts generics.ms 21`] = `"[\\"at /Users/_ac/work
 
 exports[`interpreter default scripts generics.ms 22`] = `"{\\"miniscript\\":\\"1.5.9\\",\\"buildDate\\":\\"2000.01.01\\",\\"host\\":\\"3.3.0\\",\\"hostName\\":\\"Greybel\\",\\"hostInfo\\":\\"https://github.com/ayecue/greybel-interpreter\\"}"`;
 
+exports[`interpreter default scripts generics.ms 23`] = `"0"`;
+
+exports[`interpreter default scripts generics.ms 24`] = `"1"`;
+
 exports[`interpreter default scripts list.ms 1`] = `"1"`;
 
 exports[`interpreter default scripts list.ms 2`] = `"0"`;

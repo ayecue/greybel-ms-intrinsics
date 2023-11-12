@@ -31,3 +31,10 @@ print(yield)
 
 print(stackTrace)
 print(version)
+
+print(refEquals({}, {}))
+
+a = {}
+b = a
+
+print(refEquals(a, b))
