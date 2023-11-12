@@ -1,0 +1,32 @@
+print(char(123))
+
+print(code(char(123)))
+
+print(str(false))
+
+print(val("1.23"))
+print(val("foo"))
+
+print(hash("foo"))
+print(hash(["foo", "bar"]))
+print(hash({"foo": 2, "bar": false}))
+print(hash(true))
+print(hash(1345))
+
+print(range(6))
+print(range(1, 5))
+print(range(5, 1))
+print(range(0, 10, 2))
+
+print(hash({
+    {"myTest": 0, 1: 2}: true
+}))
+
+print(log(20, 12))
+print(bitAnd(1, 0))
+print(bitXor(0, 1))
+print(bitOr(1, 1))
+
+print(yield)
+
+exit("test")
