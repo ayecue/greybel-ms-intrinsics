@@ -28,3 +28,6 @@ print(bitXor(0, 1))
 print(bitOr(1, 1))
 
 print(yield)
+
+print(stackTrace)
+print(version)
