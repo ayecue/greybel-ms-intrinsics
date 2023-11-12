@@ -312,3 +312,18 @@ export const version = CustomFunction.createExternal(
     return Promise.resolve(new CustomMap(d));
   }
 );
+
+export const stackTrace = CustomFunction.createExternal(
+  'stackTrace',
+  async (ctx: OperationContext): Promise<CustomValue> => {
+    const stackTrace = ctx.stackTrace.map((op) => {
+      return new CustomString(
+        `at ${op.target}:${op.item?.start.line ?? 0}:${
+          op.item?.start.character ?? 0
+        }`
+      );
+    });
+
+    return new CustomList(stackTrace);
+  }
+);
