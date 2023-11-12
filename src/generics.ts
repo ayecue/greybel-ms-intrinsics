@@ -21,15 +21,26 @@ export const print = CustomFunction.createExternal(
     _self: CustomValue,
     args: Map<string, CustomValue>
   ): Promise<CustomValue> => {
-    ctx.handler.outputHandler.print(ctx, args.get('value').toString(), {
-      appendNewLine: true,
-      replace: args.get('replaceText').toTruthy()
-    });
+    const value = args.get('value');
+    const delimiter = args.get('delimiter');
+
+    if (delimiter instanceof CustomString) {
+      ctx.handler.outputHandler.print(ctx, value.toString() + delimiter.toString(), {
+        appendNewLine: false,
+        replace: false
+      });
+    } else {
+      ctx.handler.outputHandler.print(ctx, value.toString(), {
+        appendNewLine: true,
+        replace: false
+      });
+    }
+
     return Promise.resolve(DefaultType.Void);
   }
 )
   .addArgument('value', new CustomString(''))
-  .addArgument('replaceText', DefaultType.False);
+  .addArgument('delimiter');
 
 export const exit = CustomFunction.createExternal(
   'exit',
