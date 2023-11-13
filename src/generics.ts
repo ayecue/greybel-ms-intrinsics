@@ -25,10 +25,14 @@ export const print = CustomFunction.createExternal(
     const delimiter = args.get('delimiter');
 
     if (delimiter instanceof CustomString) {
-      ctx.handler.outputHandler.print(ctx, value.toString() + delimiter.toString(), {
-        appendNewLine: false,
-        replace: false
-      });
+      ctx.handler.outputHandler.print(
+        ctx,
+        value.toString() + delimiter.toString(),
+        {
+          appendNewLine: false,
+          replace: false
+        }
+      );
     } else {
       ctx.handler.outputHandler.print(ctx, value.toString(), {
         appendNewLine: true,
@@ -336,5 +340,16 @@ export const stackTrace = CustomFunction.createExternal(
     });
 
     return new CustomList(stackTrace);
+  }
+);
+
+export const time = CustomFunction.createExternal(
+  'time',
+  (
+    ctx: OperationContext,
+    _self: CustomValue,
+    _args: Map<string, CustomValue>
+  ): Promise<CustomValue> => {
+    return Promise.resolve(new CustomNumber((Date.now() - ctx.time) / 1000));
   }
 );

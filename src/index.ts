@@ -28,6 +28,7 @@ export function getAPI(): ObjectValue {
   apiInterface.set(s('refEquals'), generics.refEquals);
   apiInterface.set(s('version'), generics.version);
   apiInterface.set(s('stackTrace'), generics.stackTrace);
+  apiInterface.set(s('time'), generics.time);
 
   apiInterface.set(s('abs'), math.abs);
   apiInterface.set(s('acos'), math.acos);
