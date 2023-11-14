@@ -627,10 +627,8 @@ export const replace = CustomFunction.createExternalWithSelf(
         throw new Error('replace: Invalid arguments');
       }
 
-      const hash = toReplace.hash();
-
       for (let index = 0; index < origin.value.length; index++) {
-        if (origin.value[index].hash() === hash) {
+        if (deepEqual(toReplace, origin.value[index])) {
           origin.value[index] = replaceWith;
         }
 
