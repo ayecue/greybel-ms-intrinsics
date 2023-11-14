@@ -48,6 +48,64 @@ exports[`interpreter default scripts generics.ms 23`] = `"0"`;
 
 exports[`interpreter default scripts generics.ms 24`] = `"1"`;
 
+exports[`interpreter default scripts has-index-and-index-of.ms 1`] = `"1"`;
+
+exports[`interpreter default scripts has-index-and-index-of.ms 2`] = `"0"`;
+
+exports[`interpreter default scripts has-index-and-index-of.ms 3`] = `"1"`;
+
+exports[`interpreter default scripts has-index-and-index-of.ms 4`] = `"0"`;
+
+exports[`interpreter default scripts has-index-and-index-of.ms 5`] = `"2"`;
+
+exports[`interpreter default scripts has-index-and-index-of.ms 6`] = `"null"`;
+
+exports[`interpreter default scripts has-index-and-index-of.ms 7`] = `"1"`;
+
+exports[`interpreter default scripts has-index-and-index-of.ms 8`] = `"0"`;
+
+exports[`interpreter default scripts has-index-and-index-of.ms 9`] = `"1"`;
+
+exports[`interpreter default scripts has-index-and-index-of.ms 10`] = `"0"`;
+
+exports[`interpreter default scripts has-index-and-index-of.ms 11`] = `"2"`;
+
+exports[`interpreter default scripts has-index-and-index-of.ms 12`] = `"null"`;
+
+exports[`interpreter default scripts has-index-and-index-of.ms 13`] = `"1"`;
+
+exports[`interpreter default scripts has-index-and-index-of.ms 14`] = `"0"`;
+
+exports[`interpreter default scripts has-index-and-index-of.ms 15`] = `"2"`;
+
+exports[`interpreter default scripts has-index-and-index-of.ms 16`] = `"\\"foo\\""`;
+
+exports[`interpreter default scripts has-index-and-index-of.ms 17`] = `"null"`;
+
+exports[`interpreter default scripts has-index-and-index-of.ms 18`] = `"0"`;
+
+exports[`interpreter default scripts has-index-and-index-of.ms 19`] = `"4"`;
+
+exports[`interpreter default scripts has-index-and-index-of.ms 20`] = `"7"`;
+
+exports[`interpreter default scripts has-index-and-index-of.ms 21`] = `"null"`;
+
+exports[`interpreter default scripts has-index-and-index-of.ms 22`] = `"9"`;
+
+exports[`interpreter default scripts has-index-and-index-of.ms 23`] = `"0"`;
+
+exports[`interpreter default scripts has-index-and-index-of.ms 24`] = `"4"`;
+
+exports[`interpreter default scripts has-index-and-index-of.ms 25`] = `"null"`;
+
+exports[`interpreter default scripts has-index-and-index-of.ms 26`] = `"4"`;
+
+exports[`interpreter default scripts has-index-and-index-of.ms 27`] = `"null"`;
+
+exports[`interpreter default scripts has-index-and-index-of.ms 28`] = `"null"`;
+
+exports[`interpreter default scripts has-index-and-index-of.ms 29`] = `"[\\"bar\\", \\"foo\\"]"`;
+
 exports[`interpreter default scripts list.ms 1`] = `"1"`;
 
 exports[`interpreter default scripts list.ms 2`] = `"0"`;

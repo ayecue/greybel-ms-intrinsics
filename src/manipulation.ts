@@ -8,6 +8,7 @@ import {
   CustomString,
   CustomValue,
   CustomValueWithIntrinsics,
+  deepEqual,
   DefaultType,
   OperationContext
 } from 'greybel-interpreter';
@@ -35,14 +36,10 @@ export const hasIndex = CustomFunction.createExternalWithSelf(
         return Promise.resolve(DefaultType.False);
       }
       const listIndex = index.toInt();
-      return Promise.resolve(
-        new CustomBoolean(
-          Object.prototype.hasOwnProperty.call(origin.value, listIndex)
-        )
-      );
+      return Promise.resolve(new CustomBoolean(!!origin.value.at(listIndex)));
     } else if (origin instanceof CustomString) {
       const strIndex = index.toInt();
-      return Promise.resolve(new CustomBoolean(!!origin.value[strIndex]));
+      return Promise.resolve(new CustomBoolean(!!origin.value.at(strIndex)));
     }
 
     return Promise.resolve(DefaultType.False);
@@ -65,22 +62,53 @@ export const indexOf = CustomFunction.createExternalWithSelf(
     }
 
     if (origin instanceof CustomMap) {
-      const hash = value.hash();
+      let sawAfter: boolean = after instanceof CustomNil;
       for (const [key, item] of origin.value.entries()) {
-        if (item.hash() === hash) {
+        if (!sawAfter) {
+          if (deepEqual(after, key)) sawAfter = true;
+        } else if (deepEqual(value, item)) {
           return Promise.resolve(key);
         }
       }
     } else if (origin instanceof CustomList) {
-      for (let index = after.toInt(); index < origin.value.length; index++) {
-        if (origin.value[index].value === value.value) {
+      if (after instanceof CustomNil) {
+        const index = origin.value.findIndex((item) => {
+          return deepEqual(value, item);
+        });
+
+        if (index !== -1) {
+          return Promise.resolve(new CustomNumber(index));
+        }
+      } else {
+        let afterIdx = after.toInt();
+        if (afterIdx < -1) afterIdx += origin.value.length;
+        if (afterIdx < -1 || afterIdx >= origin.value.length - 1)
+          return Promise.resolve(DefaultType.Void);
+        const index = origin.value.findIndex((item, idx) => {
+          return idx > afterIdx && deepEqual(value, item);
+        });
+
+        if (index !== -1) {
           return Promise.resolve(new CustomNumber(index));
         }
       }
     } else if (origin instanceof CustomString) {
-      const strIndex = origin.value.indexOf(value.toString(), after.toInt());
-      if (strIndex !== -1) {
-        return Promise.resolve(new CustomNumber(strIndex));
+      if (after instanceof CustomNil) {
+        const index = origin.value.indexOf(value.toString());
+
+        if (index !== -1) {
+          return Promise.resolve(new CustomNumber(index));
+        }
+      } else {
+        let afterIdx = after.toInt();
+        if (afterIdx < -1) afterIdx += origin.value.length;
+        if (afterIdx < -1 || afterIdx >= origin.value.length - 1)
+          return Promise.resolve(DefaultType.Void);
+        const index = origin.value.indexOf(value.toString(), afterIdx + 1);
+
+        if (index !== -1) {
+          return Promise.resolve(new CustomNumber(index));
+        }
       }
     }
 
@@ -88,7 +116,7 @@ export const indexOf = CustomFunction.createExternalWithSelf(
   }
 )
   .addArgument('value')
-  .addArgument('after', new CustomNumber(0));
+  .addArgument('after');
 
 export const indexes = CustomFunction.createExternalWithSelf(
   'indexes',
