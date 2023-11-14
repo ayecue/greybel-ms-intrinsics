@@ -317,18 +317,24 @@ export const sort = CustomFunction.createExternalWithSelf(
       }
 
       if (isAscending) {
-        if (a instanceof CustomString && b instanceof CustomString) {
+        if (a instanceof CustomString || b instanceof CustomString) {
           return a.toString().localeCompare(b.toString());
         }
 
-        return a.toNumber() - b.toNumber();
+        const left = a.toNumber() ?? Infinity;
+        const right = b.toNumber() ?? Infinity;
+
+        return left - right;
       }
 
       if (a instanceof CustomString && b instanceof CustomString) {
         return b.toString().localeCompare(a.toString());
       }
 
-      return b.toNumber() - a.toNumber();
+      const left = a.toNumber() ?? Infinity;
+      const right = b.toNumber() ?? Infinity;
+
+      return right - left;
     });
 
     return Promise.resolve(new CustomList(sorted));
