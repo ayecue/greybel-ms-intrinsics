@@ -1,14 +1,3 @@
-import { CustomValue } from 'greybel-interpreter';
-
-export function itemAtIndex(
-  list: Array<CustomValue> | string,
-  n: number
-): number {
-  n = Math.trunc(n) || 0;
-  if (n < 0) n += list.length;
-  return n;
-}
-
 export function getHashCode(value: number, offset: number = 0): number {
   if (value === 0.0) return 0;
   return ((offset << 5) - offset + value) | 0;

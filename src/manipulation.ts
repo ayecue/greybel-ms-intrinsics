@@ -13,7 +13,7 @@ import {
   OperationContext
 } from 'greybel-interpreter';
 
-import { checkRange, itemAtIndex } from './utils';
+import { checkRange } from './utils';
 
 export const hasIndex = CustomFunction.createExternalWithSelf(
   'hasIndex',
@@ -489,7 +489,7 @@ export const remove = CustomFunction.createExternalWithSelf(
     const origin = args.get('self');
     const keyValue = args.get('keyValue');
 
-    if (origin instanceof CustomNil || keyValue instanceof CustomNil) {
+    if (origin instanceof CustomNil) {
       throw new Error("argument to 'remove' must not be null");
     }
 
@@ -500,16 +500,19 @@ export const remove = CustomFunction.createExternalWithSelf(
       }
       return Promise.resolve(DefaultType.False);
     } else if (origin instanceof CustomList) {
-      const listIndex = itemAtIndex(origin.value, keyValue.toInt());
-      if (Object.prototype.hasOwnProperty.call(origin.value, listIndex)) {
-        origin.value.splice(listIndex, 1);
-      }
+      let idx = keyValue.toInt();
+      if (idx < 0) idx += origin.value.length;
+      checkRange(idx, 0, origin.value.length - 1);
+      origin.value.splice(idx, 1);
       return Promise.resolve(DefaultType.Void);
     } else if (origin instanceof CustomString) {
-      const replaced = new CustomString(
-        origin.value.replace(keyValue.toString(), '')
-      );
-      return Promise.resolve(replaced);
+      const substr = keyValue.toString();
+      const foundPos = origin.value.indexOf(substr);
+      if (foundPos < 0) return Promise.resolve(origin);
+      const newStr =
+        origin.value.substring(0, foundPos) +
+        origin.value.substring(foundPos + substr.length);
+      return Promise.resolve(new CustomString(newStr));
     }
 
     throw new Error("Type Error: 'remove' requires map, list, or string");
