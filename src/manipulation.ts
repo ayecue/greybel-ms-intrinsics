@@ -13,7 +13,7 @@ import {
   OperationContext
 } from 'greybel-interpreter';
 
-import { checkRange } from './utils';
+import { at, checkRange } from './utils';
 
 export const hasIndex = CustomFunction.createExternalWithSelf(
   'hasIndex',
@@ -36,10 +36,10 @@ export const hasIndex = CustomFunction.createExternalWithSelf(
         return Promise.resolve(DefaultType.False);
       }
       const listIndex = index.toInt();
-      return Promise.resolve(new CustomBoolean(!!origin.value.at(listIndex)));
+      return Promise.resolve(new CustomBoolean(!!at(origin.value, listIndex)));
     } else if (origin instanceof CustomString) {
       const strIndex = index.toInt();
-      return Promise.resolve(new CustomBoolean(!!origin.value.at(strIndex)));
+      return Promise.resolve(new CustomBoolean(!!at(origin.value, strIndex)));
     }
 
     return Promise.resolve(DefaultType.False);

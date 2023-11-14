@@ -37,3 +37,13 @@ export function checkRange(
     );
   }
 }
+
+export function at<T>(arr: T[] | string, index: number): T | string {
+  const k = index >= 0 ? index : arr.length + index;
+
+  if (k < 0 || k >= arr.length) {
+    return undefined;
+  }
+
+  return arr[k];
+}
