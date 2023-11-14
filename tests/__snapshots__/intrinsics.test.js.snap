@@ -222,17 +222,17 @@ exports[`interpreter default scripts manipulation.ms 28`] = `"123"`;
 
 exports[`interpreter default scripts manipulation.ms 29`] = `"0"`;
 
-exports[`interpreter default scripts manipulation.ms 30`] = `"123"`;
+exports[`interpreter default scripts manipulation.ms 30`] = `"\\"lore\\""`;
 
 exports[`interpreter default scripts manipulation.ms 31`] = `"\\"foo\\""`;
 
-exports[`interpreter default scripts manipulation.ms 32`] = `"{\\"bar\\":1,\\"lore\\":\\"moo\\"}"`;
+exports[`interpreter default scripts manipulation.ms 32`] = `"{\\"foo\\":123,\\"bar\\":1}"`;
 
 exports[`interpreter default scripts manipulation.ms 33`] = `"[\\"xxx\\", 123]"`;
 
 exports[`interpreter default scripts manipulation.ms 34`] = `"\\"xxx\\""`;
 
-exports[`interpreter default scripts manipulation.ms 35`] = `"{\\"bar\\":1,\\"lore\\":\\"moo\\"}"`;
+exports[`interpreter default scripts manipulation.ms 35`] = `"{\\"foo\\":123,\\"bar\\":1}"`;
 
 exports[`interpreter default scripts manipulation.ms 36`] = `"[123, \\"foo\\"]"`;
 
@@ -272,9 +272,9 @@ exports[`interpreter default scripts map.ms 6`] = `"null"`;
 
 exports[`interpreter default scripts map.ms 7`] = `"2"`;
 
-exports[`interpreter default scripts map.ms 8`] = `"123"`;
+exports[`interpreter default scripts map.ms 8`] = `"\\"bar\\""`;
 
-exports[`interpreter default scripts map.ms 9`] = `"{\\"bar\\":\\"ipsum\\"}"`;
+exports[`interpreter default scripts map.ms 9`] = `"{\\"foo\\":123}"`;
 
 exports[`interpreter default scripts map.ms 10`] = `"{\\"foo\\":123,\\"bar\\":\\"ipsum\\",\\"moo\\":1}"`;
 
@@ -325,6 +325,12 @@ exports[`interpreter default scripts math.ms 18`] = `"0"`;
 exports[`interpreter default scripts math.ms 19`] = `"-1338"`;
 
 exports[`interpreter default scripts math.ms 20`] = `"12000"`;
+
+exports[`interpreter default scripts push-pop.ms 1`] = `"\\"{1: 1, 2: 1, 3: 1}\\""`;
+
+exports[`interpreter default scripts push-pop.ms 2`] = `"[1, 2, 3]"`;
+
+exports[`interpreter default scripts push-pop.ms 3`] = `"{}"`;
 
 exports[`interpreter default scripts remove.ms 1`] = `"{42:null}"`;
 
