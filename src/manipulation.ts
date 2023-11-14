@@ -8,11 +8,12 @@ import {
   CustomString,
   CustomValue,
   CustomValueWithIntrinsics,
+  deepEqual,
   DefaultType,
   OperationContext
 } from 'greybel-interpreter';
 
-import { itemAtIndex } from './utils';
+import { at, checkRange } from './utils';
 
 export const hasIndex = CustomFunction.createExternalWithSelf(
   'hasIndex',
@@ -35,14 +36,10 @@ export const hasIndex = CustomFunction.createExternalWithSelf(
         return Promise.resolve(DefaultType.False);
       }
       const listIndex = index.toInt();
-      return Promise.resolve(
-        new CustomBoolean(
-          Object.prototype.hasOwnProperty.call(origin.value, listIndex)
-        )
-      );
+      return Promise.resolve(new CustomBoolean(!!at(origin.value, listIndex)));
     } else if (origin instanceof CustomString) {
       const strIndex = index.toInt();
-      return Promise.resolve(new CustomBoolean(!!origin.value[strIndex]));
+      return Promise.resolve(new CustomBoolean(!!at(origin.value, strIndex)));
     }
 
     return Promise.resolve(DefaultType.False);
@@ -65,22 +62,53 @@ export const indexOf = CustomFunction.createExternalWithSelf(
     }
 
     if (origin instanceof CustomMap) {
-      const hash = value.hash();
+      let sawAfter: boolean = after instanceof CustomNil;
       for (const [key, item] of origin.value.entries()) {
-        if (item.hash() === hash) {
+        if (!sawAfter) {
+          if (deepEqual(after, key)) sawAfter = true;
+        } else if (deepEqual(value, item)) {
           return Promise.resolve(key);
         }
       }
     } else if (origin instanceof CustomList) {
-      for (let index = after.toInt(); index < origin.value.length; index++) {
-        if (origin.value[index].value === value.value) {
+      if (after instanceof CustomNil) {
+        const index = origin.value.findIndex((item) => {
+          return deepEqual(value, item);
+        });
+
+        if (index !== -1) {
+          return Promise.resolve(new CustomNumber(index));
+        }
+      } else {
+        let afterIdx = after.toInt();
+        if (afterIdx < -1) afterIdx += origin.value.length;
+        if (afterIdx < -1 || afterIdx >= origin.value.length - 1)
+          return Promise.resolve(DefaultType.Void);
+        const index = origin.value.findIndex((item, idx) => {
+          return idx > afterIdx && deepEqual(value, item);
+        });
+
+        if (index !== -1) {
           return Promise.resolve(new CustomNumber(index));
         }
       }
     } else if (origin instanceof CustomString) {
-      const strIndex = origin.value.indexOf(value.toString(), after.toInt());
-      if (strIndex !== -1) {
-        return Promise.resolve(new CustomNumber(strIndex));
+      if (after instanceof CustomNil) {
+        const index = origin.value.indexOf(value.toString());
+
+        if (index !== -1) {
+          return Promise.resolve(new CustomNumber(index));
+        }
+      } else {
+        let afterIdx = after.toInt();
+        if (afterIdx < -1) afterIdx += origin.value.length;
+        if (afterIdx < -1 || afterIdx >= origin.value.length - 1)
+          return Promise.resolve(DefaultType.Void);
+        const index = origin.value.indexOf(value.toString(), afterIdx + 1);
+
+        if (index !== -1) {
+          return Promise.resolve(new CustomNumber(index));
+        }
       }
     }
 
@@ -88,7 +116,7 @@ export const indexOf = CustomFunction.createExternalWithSelf(
   }
 )
   .addArgument('value')
-  .addArgument('after', new CustomNumber(0));
+  .addArgument('after');
 
 export const indexes = CustomFunction.createExternalWithSelf(
   'indexes',
@@ -234,18 +262,21 @@ export const insert = CustomFunction.createExternalWithSelf(
       throw new Error('insert: number required for index argument');
     }
 
+    let idx = index.toInt();
+
     if (origin instanceof CustomList) {
-      const listIndex = itemAtIndex(origin.value, index.toInt());
-      if (listIndex >= 0 && listIndex <= origin.value.length) {
-        origin.value.splice(listIndex, 0, value);
-      }
+      if (idx < 0) idx += origin.value.length + 1;
+      checkRange(idx, 0, origin.value.length);
+      origin.value.splice(idx, 0, value);
       return Promise.resolve(origin);
     } else if (origin instanceof CustomString) {
-      const left = origin.value.slice(0, index.toInt());
-      const right = origin.value.slice(index.toInt());
-      return Promise.resolve(
-        new CustomString(`${left}${value.toString()}${right}`)
-      );
+      if (idx < 0) idx += origin.value.length + 1;
+      checkRange(idx, 0, origin.value.length);
+      const str =
+        origin.value.substr(0, idx) +
+        value.toString() +
+        origin.value.substr(idx);
+      return Promise.resolve(new CustomString(str));
     }
 
     throw new Error('insert called on invalid type');
@@ -286,18 +317,24 @@ export const sort = CustomFunction.createExternalWithSelf(
       }
 
       if (isAscending) {
-        if (a instanceof CustomString && b instanceof CustomString) {
+        if (a instanceof CustomString || b instanceof CustomString) {
           return a.toString().localeCompare(b.toString());
         }
 
-        return a.toNumber() - b.toNumber();
+        const left = a.toNumber() ?? Infinity;
+        const right = b.toNumber() ?? Infinity;
+
+        return left - right;
       }
 
       if (a instanceof CustomString && b instanceof CustomString) {
         return b.toString().localeCompare(a.toString());
       }
 
-      return b.toNumber() - a.toNumber();
+      const left = a.toNumber() ?? Infinity;
+      const right = b.toNumber() ?? Infinity;
+
+      return right - left;
     });
 
     return Promise.resolve(new CustomList(sorted));
@@ -382,9 +419,8 @@ export const pop = CustomFunction.createExternalWithSelf(
 
     if (origin instanceof CustomMap) {
       const keys = Array.from(origin.value.keys());
-      const item = origin.value.get(keys[0]);
-      origin.value.delete(keys[0]);
-      return Promise.resolve(item || DefaultType.Void);
+      origin.value.delete(keys[keys.length - 1]);
+      return Promise.resolve(keys[keys.length - 1] || DefaultType.Void);
     } else if (origin instanceof CustomList) {
       return Promise.resolve(origin.value.pop() || DefaultType.Void);
     }
@@ -402,7 +438,11 @@ export const pull = CustomFunction.createExternalWithSelf(
   ): Promise<CustomValue> => {
     const origin = args.get('self');
 
-    if (origin instanceof CustomList) {
+    if (origin instanceof CustomMap) {
+      const keys = Array.from(origin.value.keys());
+      origin.value.delete(keys[0]);
+      return Promise.resolve(keys[0] || DefaultType.Void);
+    } else if (origin instanceof CustomList) {
       return Promise.resolve(origin.value.shift() || DefaultType.Void);
     }
 
@@ -458,7 +498,7 @@ export const remove = CustomFunction.createExternalWithSelf(
     const origin = args.get('self');
     const keyValue = args.get('keyValue');
 
-    if (origin instanceof CustomNil || keyValue instanceof CustomNil) {
+    if (origin instanceof CustomNil) {
       throw new Error("argument to 'remove' must not be null");
     }
 
@@ -469,16 +509,19 @@ export const remove = CustomFunction.createExternalWithSelf(
       }
       return Promise.resolve(DefaultType.False);
     } else if (origin instanceof CustomList) {
-      const listIndex = itemAtIndex(origin.value, keyValue.toInt());
-      if (Object.prototype.hasOwnProperty.call(origin.value, listIndex)) {
-        origin.value.splice(listIndex, 1);
-      }
+      let idx = keyValue.toInt();
+      if (idx < 0) idx += origin.value.length;
+      checkRange(idx, 0, origin.value.length - 1);
+      origin.value.splice(idx, 1);
       return Promise.resolve(DefaultType.Void);
     } else if (origin instanceof CustomString) {
-      const replaced = new CustomString(
-        origin.value.replace(keyValue.toString(), '')
-      );
-      return Promise.resolve(replaced);
+      const substr = keyValue.toString();
+      const foundPos = origin.value.indexOf(substr);
+      if (foundPos < 0) return Promise.resolve(origin);
+      const newStr =
+        origin.value.substring(0, foundPos) +
+        origin.value.substring(foundPos + substr.length);
+      return Promise.resolve(new CustomString(newStr));
     }
 
     throw new Error("Type Error: 'remove' requires map, list, or string");
@@ -516,26 +559,30 @@ export const split = CustomFunction.createExternalWithSelf(
     _self: CustomValue,
     args: Map<string, CustomValue>
   ): Promise<CustomValue> => {
-    const origin = args.get('self');
-    const delimiter = args.get('delimiter');
-    const maxCount = args.get('maxCount');
+    const origin = args.get('self').toString();
+    const delimiter = args.get('delimiter').toString();
+    const maxCount = args.get('maxCount').toInt();
+    const result: CustomValue[] = [];
+    let pos = 0;
 
-    if (origin instanceof CustomString && delimiter instanceof CustomString) {
-      let result = origin.toString().split(delimiter.toString());
-
-      if (maxCount instanceof CustomNumber) {
-        result = result.slice(0, maxCount.toInt());
-      }
-
-      const list = result.map((item) => new CustomString(item));
-      return Promise.resolve(new CustomList(list));
+    while (pos < origin.length) {
+      let nextPos: number;
+      if (maxCount >= 0 && result.length === maxCount - 1)
+        nextPos = origin.length;
+      else if (delimiter.length === 0) nextPos = pos + 1;
+      else nextPos = origin.indexOf(delimiter, pos);
+      if (nextPos < 0) nextPos = origin.length;
+      result.push(new CustomString(origin.substr(pos, nextPos - pos)));
+      pos = nextPos + delimiter.length;
+      if (pos === origin.length && delimiter.length > 0)
+        result.push(new CustomString(''));
     }
 
-    return Promise.resolve(DefaultType.Void);
+    return Promise.resolve(new CustomList(result));
   }
 )
-  .addArgument('delimiter')
-  .addArgument('maxCount');
+  .addArgument('delimiter', new CustomString(' '))
+  .addArgument('maxCount', new CustomNumber(-1));
 
 export const replace = CustomFunction.createExternalWithSelf(
   'replace',

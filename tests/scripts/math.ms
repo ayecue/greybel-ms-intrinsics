@@ -21,3 +21,5 @@ print(bitwise("<<", value, value2))
 print(bitwise(">>", value, value2))
 print(bitwise(">>>", value, value2))
 print(bitwise("~", value))
+
+print round(12345, -3)
