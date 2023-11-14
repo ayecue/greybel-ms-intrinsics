@@ -606,19 +606,29 @@ export const replace = CustomFunction.createExternalWithSelf(
       const toReplace = args.get('toReplace');
       const replaceWith = args.get('replaceWith');
 
-      if (toReplace instanceof CustomNil || replaceWith instanceof CustomNil) {
-        throw new Error('replace: Invalid arguments');
+      let count = 0;
+      let str = origin.toString();
+      const toReplaceStr =
+        toReplace instanceof CustomNil ? '' : toReplace.toString();
+      if (toReplaceStr.length === 0)
+        throw new Error('replace: toReplace argument is empty');
+      const replaceWithStr =
+        replaceWith instanceof CustomNil ? '' : replaceWith.toString();
+      let idx = 0;
+
+      while (true) {
+        idx = str.indexOf(toReplaceStr, idx);
+        if (idx < 0) break;
+        str =
+          str.substr(0, idx) +
+          replaceWithStr +
+          str.substr(idx + toReplaceStr.length);
+        idx += replaceWithStr.length;
+        count++;
+        if (actualMaxCount > 0 && count === actualMaxCount) break;
       }
 
-      if (toReplace.toString() === '') {
-        throw new Error("Type Error: 'replace' oldVal can't be empty or null");
-      }
-
-      const replaced = origin
-        .toString()
-        .replaceAll(toReplace.toString(), replaceWith.toString());
-
-      return Promise.resolve(new CustomString(replaced));
+      return Promise.resolve(new CustomString(str));
     } else if (origin instanceof CustomList) {
       const toReplace = args.get('toReplace');
       const replaceWith = args.get('replaceWith');
