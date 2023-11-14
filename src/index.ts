@@ -104,6 +104,7 @@ export function init(customAPI: ObjectValue = new ObjectValue()) {
   CustomMap.addIntrinsic(s('indexOf'), manipulation.indexOf);
   CustomMap.addIntrinsic(s('len'), manipulation.len);
   CustomMap.addIntrinsic(s('pop'), manipulation.pop);
+  CustomMap.addIntrinsic(s('pull'), manipulation.pull);
   CustomMap.addIntrinsic(s('push'), manipulation.push);
   CustomMap.addIntrinsic(s('shuffle'), manipulation.shuffle);
   CustomMap.addIntrinsic(s('sum'), manipulation.sum);
