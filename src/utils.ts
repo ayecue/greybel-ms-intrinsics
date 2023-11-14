@@ -35,3 +35,16 @@ export function isValidUnicodeChar(value: number): boolean {
   }
   return false;
 }
+
+export function checkRange(
+  i: number,
+  min: number,
+  max: number,
+  desc: string = 'index'
+) {
+  if (i < min || i > max) {
+    throw new Error(
+      `Index Error: ${desc} (${i}) out of range (${min} to ${max})`
+    );
+  }
+}

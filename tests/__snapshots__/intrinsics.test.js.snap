@@ -106,6 +106,14 @@ exports[`interpreter default scripts has-index-and-index-of.ms 28`] = `"null"`;
 
 exports[`interpreter default scripts has-index-and-index-of.ms 29`] = `"[\\"bar\\", \\"foo\\"]"`;
 
+exports[`interpreter default scripts insert.ms 1`] = `"\\"Hello there, Bob!\\""`;
+
+exports[`interpreter default scripts insert.ms 2`] = `"\\"Hello Bob?!\\""`;
+
+exports[`interpreter default scripts insert.ms 3`] = `"[1, \\"A\\", 2, 3, 4, \\"B\\", 5]"`;
+
+exports[`interpreter default scripts insert.ms 4`] = `"[\\"C\\", 1, 2, 3, 4, 5, \\"D\\"]"`;
+
 exports[`interpreter default scripts list.ms 1`] = `"1"`;
 
 exports[`interpreter default scripts list.ms 2`] = `"0"`;

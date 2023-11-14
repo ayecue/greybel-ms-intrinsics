@@ -13,7 +13,7 @@ import {
   OperationContext
 } from 'greybel-interpreter';
 
-import { itemAtIndex } from './utils';
+import { checkRange, itemAtIndex } from './utils';
 
 export const hasIndex = CustomFunction.createExternalWithSelf(
   'hasIndex',
@@ -262,18 +262,21 @@ export const insert = CustomFunction.createExternalWithSelf(
       throw new Error('insert: number required for index argument');
     }
 
+    let idx = index.toInt();
+
     if (origin instanceof CustomList) {
-      const listIndex = itemAtIndex(origin.value, index.toInt());
-      if (listIndex >= 0 && listIndex <= origin.value.length) {
-        origin.value.splice(listIndex, 0, value);
-      }
+      if (idx < 0) idx += origin.value.length + 1;
+      checkRange(idx, 0, origin.value.length);
+      origin.value.splice(idx, 0, value);
       return Promise.resolve(origin);
     } else if (origin instanceof CustomString) {
-      const left = origin.value.slice(0, index.toInt());
-      const right = origin.value.slice(index.toInt());
-      return Promise.resolve(
-        new CustomString(`${left}${value.toString()}${right}`)
-      );
+      if (idx < 0) idx += origin.value.length + 1;
+      checkRange(idx, 0, origin.value.length);
+      const str =
+        origin.value.substr(0, idx) +
+        value.toString() +
+        origin.value.substr(idx);
+      return Promise.resolve(new CustomString(str));
     }
 
     throw new Error('insert called on invalid type');
