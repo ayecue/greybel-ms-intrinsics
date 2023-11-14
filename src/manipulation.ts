@@ -550,26 +550,30 @@ export const split = CustomFunction.createExternalWithSelf(
     _self: CustomValue,
     args: Map<string, CustomValue>
   ): Promise<CustomValue> => {
-    const origin = args.get('self');
-    const delimiter = args.get('delimiter');
-    const maxCount = args.get('maxCount');
+    const origin = args.get('self').toString();
+    const delimiter = args.get('delimiter').toString();
+    const maxCount = args.get('maxCount').toInt();
+    const result: CustomValue[] = [];
+    let pos = 0;
 
-    if (origin instanceof CustomString && delimiter instanceof CustomString) {
-      let result = origin.toString().split(delimiter.toString());
-
-      if (maxCount instanceof CustomNumber) {
-        result = result.slice(0, maxCount.toInt());
-      }
-
-      const list = result.map((item) => new CustomString(item));
-      return Promise.resolve(new CustomList(list));
+    while (pos < origin.length) {
+      let nextPos: number;
+      if (maxCount >= 0 && result.length === maxCount - 1)
+        nextPos = origin.length;
+      else if (delimiter.length === 0) nextPos = pos + 1;
+      else nextPos = origin.indexOf(delimiter, pos);
+      if (nextPos < 0) nextPos = origin.length;
+      result.push(new CustomString(origin.substr(pos, nextPos - pos)));
+      pos = nextPos + delimiter.length;
+      if (pos === origin.length && delimiter.length > 0)
+        result.push(new CustomString(''));
     }
 
-    return Promise.resolve(DefaultType.Void);
+    return Promise.resolve(new CustomList(result));
   }
 )
-  .addArgument('delimiter')
-  .addArgument('maxCount');
+  .addArgument('delimiter', new CustomString(' '))
+  .addArgument('maxCount', new CustomNumber(-1));
 
 export const replace = CustomFunction.createExternalWithSelf(
   'replace',

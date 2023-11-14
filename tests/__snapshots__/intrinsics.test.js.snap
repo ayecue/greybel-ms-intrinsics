@@ -324,6 +324,34 @@ exports[`interpreter default scripts math.ms 18`] = `"0"`;
 
 exports[`interpreter default scripts math.ms 19`] = `"-1338"`;
 
+exports[`interpreter default scripts remove.ms 1`] = `"{42:null}"`;
+
+exports[`interpreter default scripts remove.ms 2`] = `"42"`;
+
+exports[`interpreter default scripts remove.ms 3`] = `"1"`;
+
+exports[`interpreter default scripts remove.ms 4`] = `"{42:null}"`;
+
+exports[`interpreter default scripts remove.ms 5`] = `"null"`;
+
+exports[`interpreter default scripts remove.ms 6`] = `"1"`;
+
+exports[`interpreter default scripts remove.ms 7`] = `"1"`;
+
+exports[`interpreter default scripts remove.ms 8`] = `"\\"Ho Bob!\\""`;
+
+exports[`interpreter default scripts remove.ms 9`] = `"\\"Hello!\\""`;
+
+exports[`interpreter default scripts remove.ms 10`] = `"[1, 2, 3, 5]"`;
+
+exports[`interpreter default scripts remove.ms 11`] = `"0"`;
+
+exports[`interpreter default scripts remove.ms 12`] = `"1"`;
+
+exports[`interpreter default scripts remove.ms 13`] = `"{\\"foo\\":\\"bar\\"}"`;
+
+exports[`interpreter default scripts remove.ms 14`] = `"[\\"a\\", \\"c\\", \\"a\\"]"`;
+
 exports[`interpreter default scripts rnd.ms 1`] = `"0.4985665436834097"`;
 
 exports[`interpreter default scripts rnd.ms 2`] = `"0.04626259859651327"`;
@@ -335,6 +363,16 @@ exports[`interpreter default scripts rnd.ms 4`] = `"0.22427810914814472"`;
 exports[`interpreter default scripts rnd.ms 5`] = `"0.2948848782107234"`;
 
 exports[`interpreter default scripts rnd.ms 6`] = `"0.8563546116929501"`;
+
+exports[`interpreter default scripts split.ms 1`] = `"[\\"Eat\\", \\"pray\\", \\"love\\"]"`;
+
+exports[`interpreter default scripts split.ms 2`] = `"[\\"\\", \\"foo\\", \\"bar\\", \\"\\"]"`;
+
+exports[`interpreter default scripts split.ms 3`] = `"[\\"Eat\\", \\"pray, love\\"]"`;
+
+exports[`interpreter default scripts split.ms 4`] = `"[\\"foo\\", \\"bar\\", \\"baz=bamf\\"]"`;
+
+exports[`interpreter default scripts split.ms 5`] = `"[\\"H\\", \\"e\\", \\"llo\\"]"`;
 
 exports[`interpreter default scripts string.ms 1`] = `"1"`;
 
