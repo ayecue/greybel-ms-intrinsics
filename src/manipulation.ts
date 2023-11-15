@@ -291,8 +291,8 @@ const ascendingSort: CompareFn = (a, b) => {
     return a.toString().localeCompare(b.toString());
   }
 
-  const left = a.toNumber() ?? Infinity;
-  const right = b.toNumber() ?? Infinity;
+  const left = a?.toNumber() ?? Infinity;
+  const right = b?.toNumber() ?? Infinity;
 
   return left - right;
 };
@@ -302,8 +302,8 @@ const descendingSort: CompareFn = (a, b) => {
     return b.toString().localeCompare(a.toString());
   }
 
-  const left = a.toNumber() ?? Infinity;
-  const right = b.toNumber() ?? Infinity;
+  const left = a?.toNumber() ?? Infinity;
+  const right = b?.toNumber() ?? Infinity;
 
   return right - left;
 };
