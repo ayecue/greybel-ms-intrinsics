@@ -250,11 +250,11 @@ exports[`interpreter default scripts manipulation.ms 42`] = `"{\\"foo\\":123,\\"
 
 exports[`interpreter default scripts manipulation.ms 43`] = `"[\\"xxx\\", \\"foo\\", 123]"`;
 
-exports[`interpreter default scripts manipulation.ms 44`] = `"null"`;
+exports[`interpreter default scripts manipulation.ms 44`] = `"{\\"foo\\":123,\\"bar\\":1,\\"lore\\":\\"moo\\"}"`;
 
-exports[`interpreter default scripts manipulation.ms 45`] = `"[123, \\"foo\\", \\"xxx\\"]"`;
+exports[`interpreter default scripts manipulation.ms 45`] = `"[123, \\"xxx\\", \\"foo\\"]"`;
 
-exports[`interpreter default scripts manipulation.ms 46`] = `"null"`;
+exports[`interpreter default scripts manipulation.ms 46`] = `"{\\"foo\\":123,\\"bar\\":1,\\"lore\\":\\"moo\\"}"`;
 
 exports[`interpreter default scripts manipulation.ms 47`] = `"[123, \\"xxx\\", \\"foo\\"]"`;
 
@@ -372,11 +372,11 @@ exports[`interpreter default scripts rnd.ms 5`] = `"0.2948848782107234"`;
 
 exports[`interpreter default scripts rnd.ms 6`] = `"0.8563546116929501"`;
 
-exports[`interpreter default scripts sort.ms 1`] = `"[3, 5, 9, 12, 45]"`;
+exports[`interpreter default scripts sort.ms 1`] = `"[45, 12, 9, 5, 3]"`;
 
 exports[`interpreter default scripts sort.ms 2`] = `"[45, 12, 9, 5, 3]"`;
 
-exports[`interpreter default scripts sort.ms 3`] = `"[\\"3\\", 5, 42]"`;
+exports[`interpreter default scripts sort.ms 3`] = `"[42, 5, \\"3\\"]"`;
 
 exports[`interpreter default scripts sort.ms 4`] = `"[42, 5, \\"3\\"]"`;
 
@@ -384,11 +384,11 @@ exports[`interpreter default scripts sort.ms 5`] = `"[1, 2, null]"`;
 
 exports[`interpreter default scripts sort.ms 6`] = `"[\\"a\\", \\"b\\", null]"`;
 
-exports[`interpreter default scripts sort.ms 7`] = `"[{\\"name\\":\\"one\\",\\"val\\":1}, {\\"name\\":\\"three\\",\\"val\\":3}, {\\"name\\":\\"two\\",\\"val\\":2}]"`;
+exports[`interpreter default scripts sort.ms 7`] = `"[{\\"name\\":\\"three\\",\\"val\\":3}, {\\"name\\":\\"two\\",\\"val\\":2}, {\\"name\\":\\"one\\",\\"val\\":1}]"`;
 
-exports[`interpreter default scripts sort.ms 8`] = `"[{\\"name\\":\\"one\\",\\"val\\":1}, {\\"name\\":\\"two\\",\\"val\\":2}, {\\"name\\":\\"three\\",\\"val\\":3}]"`;
+exports[`interpreter default scripts sort.ms 8`] = `"[{\\"name\\":\\"three\\",\\"val\\":3}, {\\"name\\":\\"two\\",\\"val\\":2}, {\\"name\\":\\"one\\",\\"val\\":1}]"`;
 
-exports[`interpreter default scripts sort.ms 9`] = `"[{\\"name\\":\\"two\\",\\"val\\":2}, {\\"name\\":\\"three\\",\\"val\\":3}, {\\"name\\":\\"one\\",\\"val\\":1}]"`;
+exports[`interpreter default scripts sort.ms 9`] = `"[{\\"name\\":\\"three\\",\\"val\\":3}, {\\"name\\":\\"two\\",\\"val\\":2}, {\\"name\\":\\"one\\",\\"val\\":1}]"`;
 
 exports[`interpreter default scripts sort.ms 10`] = `"[{\\"name\\":\\"three\\",\\"val\\":3}, {\\"name\\":\\"two\\",\\"val\\":2}, {\\"name\\":\\"one\\",\\"val\\":1}]"`;
 
