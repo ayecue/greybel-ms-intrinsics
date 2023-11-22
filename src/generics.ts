@@ -10,7 +10,7 @@ import {
   deepHash,
   DefaultType,
   ObjectValue,
-  OperationContext
+  VM
 } from 'greybel-interpreter';
 
 import { isValidUnicodeChar } from './utils';
@@ -18,7 +18,7 @@ import { isValidUnicodeChar } from './utils';
 export const print = CustomFunction.createExternal(
   'print',
   (
-    ctx: OperationContext,
+    vm: VM,
     _self: CustomValue,
     args: Map<string, CustomValue>
   ): Promise<CustomValue> => {
@@ -26,8 +26,8 @@ export const print = CustomFunction.createExternal(
     const delimiter = args.get('delimiter');
 
     if (delimiter instanceof CustomString) {
-      ctx.handler.outputHandler.print(
-        ctx,
+      vm.handler.outputHandler.print(
+        vm,
         value.toString() + delimiter.toString(),
         {
           appendNewLine: false,
@@ -35,7 +35,7 @@ export const print = CustomFunction.createExternal(
         }
       );
     } else {
-      ctx.handler.outputHandler.print(ctx, value.toString(), {
+      vm.handler.outputHandler.print(vm, value.toString(), {
         appendNewLine: true,
         replace: false
       });
@@ -50,12 +50,12 @@ export const print = CustomFunction.createExternal(
 export const exit = CustomFunction.createExternal(
   'exit',
   (
-    ctx: OperationContext,
+    vm: VM,
     _self: CustomValue,
     args: Map<string, CustomValue>
   ): Promise<CustomValue> => {
-    ctx.handler.outputHandler.print(ctx, args.get('value').toString());
-    ctx.exit();
+    vm.handler.outputHandler.print(vm, args.get('value').toString());
+    vm.exit();
     return Promise.resolve(DefaultType.Void);
   }
 ).addArgument('value');
@@ -63,7 +63,7 @@ export const exit = CustomFunction.createExternal(
 export const wait = CustomFunction.createExternal(
   'wait',
   (
-    ctx: OperationContext,
+    vm: VM,
     _self: CustomValue,
     args: Map<string, CustomValue>
   ): Promise<CustomValue> => {
@@ -85,11 +85,11 @@ export const wait = CustomFunction.createExternal(
         resolve(DefaultType.Void);
       };
       const timeout = setTimeout(() => {
-        ctx.processState.removeListener('exit', onExit);
+        vm.getSignal().removeListener('exit', onExit);
         resolve(DefaultType.Void);
       }, ms);
 
-      ctx.processState.once('exit', onExit);
+      vm.getSignal().once('exit', onExit);
     });
   }
 ).addArgument('delay', new CustomNumber(1));
@@ -97,7 +97,7 @@ export const wait = CustomFunction.createExternal(
 export const char = CustomFunction.createExternal(
   'char',
   (
-    _ctx: OperationContext,
+    _vm: VM,
     _self: CustomValue,
     args: Map<string, CustomValue>
   ): Promise<CustomValue> => {
@@ -119,7 +119,7 @@ export const char = CustomFunction.createExternal(
 export const code = CustomFunction.createExternalWithSelf(
   'code',
   (
-    _ctx: OperationContext,
+    _vm: VM,
     _self: CustomValue,
     args: Map<string, CustomValue>
   ): Promise<CustomValue> => {
@@ -143,7 +143,7 @@ export const code = CustomFunction.createExternalWithSelf(
 export const str = CustomFunction.createExternal(
   'str',
   (
-    _ctx: OperationContext,
+    _vm: VM,
     _self: CustomValue,
     args: Map<string, CustomValue>
   ): Promise<CustomValue> => {
@@ -154,7 +154,7 @@ export const str = CustomFunction.createExternal(
 export const val = CustomFunction.createExternalWithSelf(
   'val',
   (
-    _ctx: OperationContext,
+    _vm: VM,
     _self: CustomValue,
     args: Map<string, CustomValue>
   ): Promise<CustomValue> => {
@@ -175,7 +175,7 @@ export const val = CustomFunction.createExternalWithSelf(
 export const hash = CustomFunction.createExternal(
   'hash',
   (
-    _ctx: OperationContext,
+    _vm: VM,
     _self: CustomValue,
     args: Map<string, CustomValue>
   ): Promise<CustomValue> => {
@@ -190,7 +190,7 @@ export const hash = CustomFunction.createExternal(
 export const range = CustomFunction.createExternal(
   'range',
   (
-    _ctx: OperationContext,
+    _vm: VM,
     _self: CustomValue,
     args: Map<string, CustomValue>
   ): Promise<CustomValue> => {
@@ -227,7 +227,7 @@ export const range = CustomFunction.createExternal(
 export const customYield = CustomFunction.createExternal(
   'yield',
   (
-    _ctx: OperationContext,
+    _vm: VM,
     _self: CustomValue,
     _args: Map<string, CustomValue>
   ): Promise<CustomValue> => {
@@ -240,7 +240,7 @@ export const customYield = CustomFunction.createExternal(
 export const refEquals = CustomFunction.createExternal(
   'refEquals',
   (
-    _ctx: OperationContext,
+    _vm: VM,
     _self: CustomValue,
     args: Map<string, CustomValue>
   ): Promise<CustomValue> => {
@@ -280,7 +280,7 @@ export const refEquals = CustomFunction.createExternal(
 export const version = CustomFunction.createExternal(
   'version',
   (
-    _ctx: OperationContext,
+    _vm: VM,
     _self: CustomValue,
     _args: Map<string, CustomValue>
   ): Promise<CustomValue> => {
@@ -302,14 +302,17 @@ export const version = CustomFunction.createExternal(
 
 export const stackTrace = CustomFunction.createExternal(
   'stackTrace',
-  async (ctx: OperationContext): Promise<CustomValue> => {
-    const stackTrace = ctx.stackTrace.map((op) => {
-      return new CustomString(
-        `at ${op.target}:${op.item?.start.line ?? 0}:${
-          op.item?.start.character ?? 0
-        }`
-      );
-    });
+  async (vm: VM): Promise<CustomValue> => {
+    const stackTrace = vm
+      .getStacktrace()
+      .slice(1)
+      .map((op) => {
+        return new CustomString(
+          `at ${op.source.path}:${op.source?.start.line ?? 0}:${
+            op.source?.start.character ?? 0
+          }`
+        );
+      });
 
     return new CustomList(stackTrace);
   }
@@ -318,10 +321,12 @@ export const stackTrace = CustomFunction.createExternal(
 export const time = CustomFunction.createExternal(
   'time',
   (
-    ctx: OperationContext,
+    vm: VM,
     _self: CustomValue,
     _args: Map<string, CustomValue>
   ): Promise<CustomValue> => {
-    return Promise.resolve(new CustomNumber((Date.now() - ctx.time) / 1000));
+    return Promise.resolve(
+      new CustomNumber((Date.now() - vm.getTime()) / 1000)
+    );
   }
 );
