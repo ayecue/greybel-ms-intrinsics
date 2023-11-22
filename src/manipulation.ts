@@ -9,7 +9,7 @@ import {
   CustomValue,
   deepEqual,
   DefaultType,
-  OperationContext
+  VM
 } from 'greybel-interpreter';
 
 import { at, checkRange } from './utils';
@@ -17,7 +17,7 @@ import { at, checkRange } from './utils';
 export const hasIndex = CustomFunction.createExternalWithSelf(
   'hasIndex',
   (
-    _ctx: OperationContext,
+    _vm: VM,
     _self: CustomValue,
     args: Map<string, CustomValue>
   ): Promise<CustomValue> => {
@@ -48,7 +48,7 @@ export const hasIndex = CustomFunction.createExternalWithSelf(
 export const indexOf = CustomFunction.createExternalWithSelf(
   'indexOf',
   (
-    _ctx: OperationContext,
+    _vm: VM,
     _self: CustomValue,
     args: Map<string, CustomValue>
   ): Promise<CustomValue> => {
@@ -120,7 +120,7 @@ export const indexOf = CustomFunction.createExternalWithSelf(
 export const indexes = CustomFunction.createExternalWithSelf(
   'indexes',
   (
-    _ctx: OperationContext,
+    _vm: VM,
     _self: CustomValue,
     args: Map<string, CustomValue>
   ): Promise<CustomValue> => {
@@ -143,7 +143,7 @@ export const indexes = CustomFunction.createExternalWithSelf(
 export const values = CustomFunction.createExternalWithSelf(
   'values',
   (
-    _ctx: OperationContext,
+    _vm: VM,
     _self: CustomValue,
     args: Map<string, CustomValue>
   ): Promise<CustomValue> => {
@@ -169,7 +169,7 @@ export const values = CustomFunction.createExternalWithSelf(
 export const len = CustomFunction.createExternalWithSelf(
   'len',
   (
-    _ctx: OperationContext,
+    _vm: VM,
     _self: CustomValue,
     args: Map<string, CustomValue>
   ): Promise<CustomValue> => {
@@ -188,7 +188,7 @@ export const len = CustomFunction.createExternalWithSelf(
 export const lower = CustomFunction.createExternalWithSelf(
   'lower',
   (
-    _ctx: OperationContext,
+    _vm: VM,
     _self: CustomValue,
     args: Map<string, CustomValue>
   ): Promise<CustomValue> => {
@@ -204,7 +204,7 @@ export const lower = CustomFunction.createExternalWithSelf(
 export const upper = CustomFunction.createExternalWithSelf(
   'upper',
   (
-    _ctx: OperationContext,
+    _vm: VM,
     _self: CustomValue,
     args: Map<string, CustomValue>
   ): Promise<CustomValue> => {
@@ -220,7 +220,7 @@ export const upper = CustomFunction.createExternalWithSelf(
 export const slice = CustomFunction.createExternalWithSelf(
   'slice',
   (
-    _ctx: OperationContext,
+    _vm: VM,
     _self: CustomValue,
     args: Map<string, CustomValue>
   ): Promise<CustomValue> => {
@@ -245,7 +245,7 @@ export const slice = CustomFunction.createExternalWithSelf(
 export const insert = CustomFunction.createExternalWithSelf(
   'insert',
   (
-    _ctx: OperationContext,
+    _vm: VM,
     _self: CustomValue,
     args: Map<string, CustomValue>
   ): Promise<CustomValue> => {
@@ -311,7 +311,7 @@ const descendingSort: CompareFn = (a, b) => {
 export const sort = CustomFunction.createExternalWithSelf(
   'sort',
   (
-    ctx: OperationContext,
+    vm: VM,
     _self: CustomValue,
     args: Map<string, CustomValue>
   ): Promise<CustomValue> => {
@@ -339,7 +339,7 @@ export const sort = CustomFunction.createExternalWithSelf(
       for (let i = 0; i < count; i++) {
         const item = origin.value[i];
         if (item instanceof CustomMap) {
-          items[i].sortKey = item.get(key, ctx.contextTypeIntrinsics);
+          items[i].sortKey = item.get(key, vm.contextTypeIntrinsics);
         } else if (item instanceof CustomList) {
           items[i].sortKey =
             byKeyInt > -item.value.length && byKeyInt < item.value.length
@@ -366,7 +366,7 @@ export const sort = CustomFunction.createExternalWithSelf(
 export const sum = CustomFunction.createExternalWithSelf(
   'sum',
   (
-    _ctx: OperationContext,
+    _vm: VM,
     _self: CustomValue,
     args: Map<string, CustomValue>
   ): Promise<CustomValue> => {
@@ -386,7 +386,7 @@ export const sum = CustomFunction.createExternalWithSelf(
 export const shuffle = CustomFunction.createExternalWithSelf(
   'shuffle',
   (
-    _ctx: OperationContext,
+    _vm: VM,
     _self: CustomValue,
     args: Map<string, CustomValue>
   ): Promise<CustomValue> => {
@@ -431,7 +431,7 @@ export const shuffle = CustomFunction.createExternalWithSelf(
 export const pop = CustomFunction.createExternalWithSelf(
   'pop',
   (
-    _ctx: OperationContext,
+    _vm: VM,
     _self: CustomValue,
     args: Map<string, CustomValue>
   ): Promise<CustomValue> => {
@@ -452,7 +452,7 @@ export const pop = CustomFunction.createExternalWithSelf(
 export const pull = CustomFunction.createExternalWithSelf(
   'pull',
   (
-    _ctx: OperationContext,
+    _vm: VM,
     _self: CustomValue,
     args: Map<string, CustomValue>
   ): Promise<CustomValue> => {
@@ -473,7 +473,7 @@ export const pull = CustomFunction.createExternalWithSelf(
 export const push = CustomFunction.createExternalWithSelf(
   'push',
   (
-    _ctx: OperationContext,
+    _vm: VM,
     _self: CustomValue,
     args: Map<string, CustomValue>
   ): Promise<CustomValue> => {
@@ -511,7 +511,7 @@ export const push = CustomFunction.createExternalWithSelf(
 export const remove = CustomFunction.createExternalWithSelf(
   'remove',
   (
-    _ctx: OperationContext,
+    _vm: VM,
     _self: CustomValue,
     args: Map<string, CustomValue>
   ): Promise<CustomValue> => {
@@ -551,7 +551,7 @@ export const remove = CustomFunction.createExternalWithSelf(
 export const join = CustomFunction.createExternalWithSelf(
   'join',
   (
-    _ctx: OperationContext,
+    _vm: VM,
     _self: CustomValue,
     args: Map<string, CustomValue>
   ): Promise<CustomValue> => {
@@ -575,7 +575,7 @@ export const join = CustomFunction.createExternalWithSelf(
 export const split = CustomFunction.createExternalWithSelf(
   'split',
   (
-    _ctx: OperationContext,
+    _vm: VM,
     _self: CustomValue,
     args: Map<string, CustomValue>
   ): Promise<CustomValue> => {
@@ -607,7 +607,7 @@ export const split = CustomFunction.createExternalWithSelf(
 export const replace = CustomFunction.createExternalWithSelf(
   'replace',
   (
-    _ctx: OperationContext,
+    _vm: VM,
     _self: CustomValue,
     args: Map<string, CustomValue>
   ): Promise<CustomValue> => {
@@ -703,7 +703,7 @@ export const replace = CustomFunction.createExternalWithSelf(
 export const trim = CustomFunction.createExternalWithSelf(
   'trim',
   (
-    _ctx: OperationContext,
+    _vm: VM,
     _self: CustomValue,
     args: Map<string, CustomValue>
   ): Promise<CustomValue> => {
