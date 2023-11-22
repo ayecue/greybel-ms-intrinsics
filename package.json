@@ -1,6 +1,6 @@
 {
     "name": "greybel-ms-intrinsics",
-    "version": "1.0.5",
+    "version": "1.0.6",
     "description": "Interpreter MiniScript intrinsics",
     "main": "dist/index",
     "typings": "dist/index",
@@ -51,6 +51,6 @@
         "miniscript"
     ],
     "dependencies": {
-        "greybel-interpreter": "~4.0.16"
+        "greybel-interpreter": "~4.0.18"
     }
 }
