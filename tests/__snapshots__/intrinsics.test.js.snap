@@ -362,15 +362,15 @@ exports[`interpreter default scripts remove.ms 14`] = `"[\\"a\\", \\"c\\", \\"a\
 
 exports[`interpreter default scripts rnd.ms 1`] = `"0.4985665436834097"`;
 
-exports[`interpreter default scripts rnd.ms 2`] = `"0.04626259859651327"`;
+exports[`interpreter default scripts rnd.ms 2`] = `"0.4985665436834097"`;
 
-exports[`interpreter default scripts rnd.ms 3`] = `"0.04173178947530687"`;
+exports[`interpreter default scripts rnd.ms 3`] = `"0.5925850959029049"`;
 
-exports[`interpreter default scripts rnd.ms 4`] = `"0.22427810914814472"`;
+exports[`interpreter default scripts rnd.ms 4`] = `"0.5925850959029049"`;
 
-exports[`interpreter default scripts rnd.ms 5`] = `"0.2948848782107234"`;
+exports[`interpreter default scripts rnd.ms 5`] = `"0.4985665436834097"`;
 
-exports[`interpreter default scripts rnd.ms 6`] = `"0.8563546116929501"`;
+exports[`interpreter default scripts rnd.ms 6`] = `"0.4985665436834097"`;
 
 exports[`interpreter default scripts sort.ms 1`] = `"[45, 12, 9, 5, 3]"`;
 
