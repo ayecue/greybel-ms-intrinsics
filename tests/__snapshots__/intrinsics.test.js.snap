@@ -447,3 +447,45 @@ exports[`interpreter default scripts string.ms 21`] = `"\\"foo \\"bar\\" foo\\""
 exports[`interpreter default scripts string.ms 22`] = `"[\\"ab.ce.d\\"]"`;
 
 exports[`interpreter default scripts string.ms 23`] = `"\\"xxx lrem ipsum bar fr\\""`;
+
+exports[`interpreter default scripts val.ms 1`] = `"1.23"`;
+
+exports[`interpreter default scripts val.ms 2`] = `"123"`;
+
+exports[`interpreter default scripts val.ms 3`] = `"1"`;
+
+exports[`interpreter default scripts val.ms 4`] = `"0"`;
+
+exports[`interpreter default scripts val.ms 5`] = `"0"`;
+
+exports[`interpreter default scripts val.ms 6`] = `"1234.56"`;
+
+exports[`interpreter default scripts val.ms 7`] = `"0"`;
+
+exports[`interpreter default scripts val.ms 8`] = `"0"`;
+
+exports[`interpreter default scripts val.ms 9`] = `"0"`;
+
+exports[`interpreter default scripts val.ms 10`] = `"1234.5"`;
+
+exports[`interpreter default scripts val.ms 11`] = `"0"`;
+
+exports[`interpreter default scripts val.ms 12`] = `"12.5"`;
+
+exports[`interpreter default scripts val.ms 13`] = `"-12.5"`;
+
+exports[`interpreter default scripts val.ms 14`] = `"2.3"`;
+
+exports[`interpreter default scripts val.ms 15`] = `"230"`;
+
+exports[`interpreter default scripts val.ms 16`] = `"2.32"`;
+
+exports[`interpreter default scripts val.ms 17`] = `"232"`;
+
+exports[`interpreter default scripts val.ms 18`] = `"1"`;
+
+exports[`interpreter default scripts val.ms 19`] = `"1230"`;
+
+exports[`interpreter default scripts val.ms 20`] = `"0.123"`;
+
+exports[`interpreter default scripts val.ms 21`] = `"0"`;
