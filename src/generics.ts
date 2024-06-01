@@ -162,12 +162,12 @@ export const val = CustomFunction.createExternalWithSelf(
     if (origin instanceof CustomNumber) {
       return Promise.resolve(origin);
     } else if (origin instanceof CustomString) {
-      const isNumber = /^[+-]?[\d,]+(\.[\d+]+)?([Ee][+-]?\d+)?$/.test(
+      const isNumber = /^[+-]?([\d][\d,]*)?(\.[\d+]+)?([Ee][+-]?\d+)?$/.test(
         origin.value.trim()
       );
       return Promise.resolve(
         isNumber
-          ? new CustomNumber(parseFloat(origin.value.replace(/,/g, '')))
+          ? new CustomNumber(Number(origin.value.replace(/,/g, '')))
           : DefaultType.Zero
       );
     }
@@ -311,8 +311,7 @@ export const stackTrace = CustomFunction.createExternal(
       .slice(1)
       .map((op) => {
         return new CustomString(
-          `at ${op.source.path}:${op.source?.start.line ?? 0}:${
-            op.source?.start.character ?? 0
+          `at ${op.source.path}:${op.source?.start.line ?? 0}:${op.source?.start.character ?? 0
           }`
         );
       });

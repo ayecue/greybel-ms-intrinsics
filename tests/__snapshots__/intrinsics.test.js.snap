@@ -489,3 +489,15 @@ exports[`interpreter default scripts val.ms 19`] = `"1230"`;
 exports[`interpreter default scripts val.ms 20`] = `"0.123"`;
 
 exports[`interpreter default scripts val.ms 21`] = `"0"`;
+
+exports[`interpreter default scripts val.ms 22`] = `"0"`;
+
+exports[`interpreter default scripts val.ms 23`] = `"1234.56"`;
+
+exports[`interpreter default scripts val.ms 24`] = `"1.56"`;
+
+exports[`interpreter default scripts val.ms 25`] = `"0"`;
+
+exports[`interpreter default scripts val.ms 26`] = `"0.56"`;
+
+exports[`interpreter default scripts val.ms 27`] = `"2"`;
