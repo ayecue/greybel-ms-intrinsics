@@ -42,7 +42,7 @@ exports[`interpreter default scripts generics.ms 20`] = `"null"`;
 
 exports[`interpreter default scripts generics.ms 21`] = `"1"`;
 
-exports[`interpreter default scripts generics.ms 22`] = `"{\\"miniscript\\":\\"1.5.9\\",\\"buildDate\\":\\"2000.01.01\\",\\"host\\":\\"3.3.0\\",\\"hostName\\":\\"Greybel\\",\\"hostInfo\\":\\"https://github.com/ayecue/greybel-interpreter\\"}"`;
+exports[`interpreter default scripts generics.ms 22`] = `"{\\"miniscript\\": \\"1.5.9\\",\\"buildDate\\": \\"2000.01.01\\",\\"host\\": \\"3.3.0\\",\\"hostName\\": \\"Greybel\\",\\"hostInfo\\": \\"https://github.com/ayecue/greybel-interpreter\\"}"`;
 
 exports[`interpreter default scripts generics.ms 23`] = `"0"`;
 
@@ -158,7 +158,7 @@ exports[`interpreter default scripts list.ms 21`] = `"1"`;
 
 exports[`interpreter default scripts list.ms 22`] = `"\\"true\\""`;
 
-exports[`interpreter default scripts list.ms 23`] = `"[{\\"foo\\":2}, {\\"foo\\":4}, {\\"foo\\":5}, {\\"foo\\":9}]"`;
+exports[`interpreter default scripts list.ms 23`] = `"[{\\"foo\\": 2}, {\\"foo\\": 4}, {\\"foo\\": 5}, {\\"foo\\": 9}]"`;
 
 exports[`interpreter default scripts list.ms 24`] = `"[1, 2, 1337, 3, 4]"`;
 
@@ -226,35 +226,35 @@ exports[`interpreter default scripts manipulation.ms 30`] = `"\\"lore\\""`;
 
 exports[`interpreter default scripts manipulation.ms 31`] = `"\\"foo\\""`;
 
-exports[`interpreter default scripts manipulation.ms 32`] = `"{\\"foo\\":123,\\"bar\\":1}"`;
+exports[`interpreter default scripts manipulation.ms 32`] = `"{\\"foo\\": 123,\\"bar\\": 1}"`;
 
 exports[`interpreter default scripts manipulation.ms 33`] = `"[\\"xxx\\", 123]"`;
 
 exports[`interpreter default scripts manipulation.ms 34`] = `"\\"xxx\\""`;
 
-exports[`interpreter default scripts manipulation.ms 35`] = `"{\\"foo\\":123,\\"bar\\":1}"`;
+exports[`interpreter default scripts manipulation.ms 35`] = `"{\\"foo\\": 123,\\"bar\\": 1}"`;
 
 exports[`interpreter default scripts manipulation.ms 36`] = `"[123, \\"foo\\"]"`;
 
-exports[`interpreter default scripts manipulation.ms 37`] = `"{\\"foo\\":123,\\"bar\\":1,\\"lore\\":\\"moo\\",\\"addition\\":1}"`;
+exports[`interpreter default scripts manipulation.ms 37`] = `"{\\"foo\\": 123,\\"bar\\": 1,\\"lore\\": \\"moo\\",\\"addition\\": 1}"`;
 
 exports[`interpreter default scripts manipulation.ms 38`] = `"[\\"xxx\\", 123, \\"foo\\", \\"addition\\"]"`;
 
-exports[`interpreter default scripts manipulation.ms 39`] = `"{\\"foo\\":123,\\"lore\\":\\"moo\\"}"`;
+exports[`interpreter default scripts manipulation.ms 39`] = `"{\\"foo\\": 123,\\"lore\\": \\"moo\\"}"`;
 
 exports[`interpreter default scripts manipulation.ms 40`] = `"[\\"xxx\\", \\"foo\\"]"`;
 
 exports[`interpreter default scripts manipulation.ms 41`] = `"\\"abc lorem  XxXaV\\""`;
 
-exports[`interpreter default scripts manipulation.ms 42`] = `"{\\"foo\\":123,\\"bar\\":\\"moo\\",\\"lore\\":1}"`;
+exports[`interpreter default scripts manipulation.ms 42`] = `"{\\"foo\\": 123,\\"bar\\": \\"moo\\",\\"lore\\": 1}"`;
 
 exports[`interpreter default scripts manipulation.ms 43`] = `"[\\"xxx\\", \\"foo\\", 123]"`;
 
-exports[`interpreter default scripts manipulation.ms 44`] = `"{\\"foo\\":123,\\"bar\\":1,\\"lore\\":\\"moo\\"}"`;
+exports[`interpreter default scripts manipulation.ms 44`] = `"{\\"foo\\": 123,\\"bar\\": 1,\\"lore\\": \\"moo\\"}"`;
 
 exports[`interpreter default scripts manipulation.ms 45`] = `"[123, \\"xxx\\", \\"foo\\"]"`;
 
-exports[`interpreter default scripts manipulation.ms 46`] = `"{\\"foo\\":123,\\"bar\\":1,\\"lore\\":\\"moo\\"}"`;
+exports[`interpreter default scripts manipulation.ms 46`] = `"{\\"foo\\": 123,\\"bar\\": 1,\\"lore\\": \\"moo\\"}"`;
 
 exports[`interpreter default scripts manipulation.ms 47`] = `"[123, \\"xxx\\", \\"foo\\"]"`;
 
@@ -274,17 +274,17 @@ exports[`interpreter default scripts map.ms 7`] = `"2"`;
 
 exports[`interpreter default scripts map.ms 8`] = `"\\"bar\\""`;
 
-exports[`interpreter default scripts map.ms 9`] = `"{\\"foo\\":123}"`;
+exports[`interpreter default scripts map.ms 9`] = `"{\\"foo\\": 123}"`;
 
-exports[`interpreter default scripts map.ms 10`] = `"{\\"foo\\":123,\\"bar\\":\\"ipsum\\",\\"moo\\":1}"`;
+exports[`interpreter default scripts map.ms 10`] = `"{\\"foo\\": 123,\\"bar\\": \\"ipsum\\",\\"moo\\": 1}"`;
 
 exports[`interpreter default scripts map.ms 11`] = `"323"`;
 
-exports[`interpreter default scripts map.ms 12`] = `"{\\"foo\\":123,\\"bar\\":\\"ipsum\\"}"`;
+exports[`interpreter default scripts map.ms 12`] = `"{\\"foo\\": 123,\\"bar\\": \\"ipsum\\"}"`;
 
 exports[`interpreter default scripts map.ms 13`] = `"1"`;
 
-exports[`interpreter default scripts map.ms 14`] = `"{\\"test\\":3,\\"bar\\":3,\\"foo\\":1}"`;
+exports[`interpreter default scripts map.ms 14`] = `"{\\"test\\": 3,\\"bar\\": 3,\\"foo\\": 1}"`;
 
 exports[`interpreter default scripts math.ms 1`] = `"1337"`;
 
@@ -332,13 +332,13 @@ exports[`interpreter default scripts push-pop.ms 2`] = `"[1, 2, 3]"`;
 
 exports[`interpreter default scripts push-pop.ms 3`] = `"{}"`;
 
-exports[`interpreter default scripts remove.ms 1`] = `"{42:null}"`;
+exports[`interpreter default scripts remove.ms 1`] = `"{42: null}"`;
 
 exports[`interpreter default scripts remove.ms 2`] = `"42"`;
 
 exports[`interpreter default scripts remove.ms 3`] = `"1"`;
 
-exports[`interpreter default scripts remove.ms 4`] = `"{42:null}"`;
+exports[`interpreter default scripts remove.ms 4`] = `"{42: null}"`;
 
 exports[`interpreter default scripts remove.ms 5`] = `"null"`;
 
@@ -356,7 +356,7 @@ exports[`interpreter default scripts remove.ms 11`] = `"0"`;
 
 exports[`interpreter default scripts remove.ms 12`] = `"1"`;
 
-exports[`interpreter default scripts remove.ms 13`] = `"{\\"foo\\":\\"bar\\"}"`;
+exports[`interpreter default scripts remove.ms 13`] = `"{\\"foo\\": \\"bar\\"}"`;
 
 exports[`interpreter default scripts remove.ms 14`] = `"[\\"a\\", \\"c\\", \\"a\\"]"`;
 
@@ -384,13 +384,13 @@ exports[`interpreter default scripts sort.ms 5`] = `"[1, 2, null]"`;
 
 exports[`interpreter default scripts sort.ms 6`] = `"[\\"a\\", \\"b\\", null]"`;
 
-exports[`interpreter default scripts sort.ms 7`] = `"[{\\"name\\":\\"three\\",\\"val\\":3}, {\\"name\\":\\"two\\",\\"val\\":2}, {\\"name\\":\\"one\\",\\"val\\":1}]"`;
+exports[`interpreter default scripts sort.ms 7`] = `"[{\\"name\\": \\"three\\",\\"val\\": 3}, {\\"name\\": \\"two\\",\\"val\\": 2}, {\\"name\\": \\"one\\",\\"val\\": 1}]"`;
 
-exports[`interpreter default scripts sort.ms 8`] = `"[{\\"name\\":\\"three\\",\\"val\\":3}, {\\"name\\":\\"two\\",\\"val\\":2}, {\\"name\\":\\"one\\",\\"val\\":1}]"`;
+exports[`interpreter default scripts sort.ms 8`] = `"[{\\"name\\": \\"three\\",\\"val\\": 3}, {\\"name\\": \\"two\\",\\"val\\": 2}, {\\"name\\": \\"one\\",\\"val\\": 1}]"`;
 
-exports[`interpreter default scripts sort.ms 9`] = `"[{\\"name\\":\\"three\\",\\"val\\":3}, {\\"name\\":\\"two\\",\\"val\\":2}, {\\"name\\":\\"one\\",\\"val\\":1}]"`;
+exports[`interpreter default scripts sort.ms 9`] = `"[{\\"name\\": \\"three\\",\\"val\\": 3}, {\\"name\\": \\"two\\",\\"val\\": 2}, {\\"name\\": \\"one\\",\\"val\\": 1}]"`;
 
-exports[`interpreter default scripts sort.ms 10`] = `"[{\\"name\\":\\"three\\",\\"val\\":3}, {\\"name\\":\\"two\\",\\"val\\":2}, {\\"name\\":\\"one\\",\\"val\\":1}]"`;
+exports[`interpreter default scripts sort.ms 10`] = `"[{\\"name\\": \\"three\\",\\"val\\": 3}, {\\"name\\": \\"two\\",\\"val\\": 2}, {\\"name\\": \\"one\\",\\"val\\": 1}]"`;
 
 exports[`interpreter default scripts split.ms 1`] = `"[\\"Eat\\", \\"pray\\", \\"love\\"]"`;
 
